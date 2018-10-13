@@ -1,0 +1,44 @@
+<html>
+<body>
+  <h1>
+    THE TITLE OF YOUR WEBPAGE
+  </h1>
+  <div id="container">
+    <div class="content">
+      This is the glorious text-content!
+    </div>
+  </div>
+
+  <script>
+    const container = document.querySelector('#container');
+
+    const redP = document.createElement('p');
+    redP.classList.add('redPara');
+    redP.textContent = "Hey I'm red!";
+    redP.style.color = 'red';
+
+    const blueH3 = document.createElement('h3');
+    blueH3.classList.add('blueH3');
+    blueH3.textContent = "I'm a blue h3!";
+    blueH3.style.color = 'blue';
+
+    const blackAndPinkDiv = document.createElement('div');
+    blackAndPinkDiv.classList.add('blackAndPinkDiv');
+    blackAndPinkDiv.style.cssText = "background: pink; border: 1px solid black;";
+
+    const inADivH1 = document.createElement('h1');
+    inADivH1.textContent = "I'm in a div!";
+
+    const inADivP = document.createElement('p');
+    inADivP.classList.add('redPara');
+    inADivP.textContent = "ME TOO!";
+
+    blackAndPinkDiv.appendChild(inADivH1);
+    blackAndPinkDiv.appendChild(inADivP);
+
+    container.appendChild(redP);
+    container.appendChild(blueH3);
+    container.appendChild(blackAndPinkDiv);
+  </script>
+</body>
+</html>
