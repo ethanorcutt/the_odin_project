@@ -1,0 +1,21 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+body {
+  background-color: lightblue;
+}
+
+.container {
+  position: relative;
+  margin: 50 auto 0 auto;
+  width: 800px;
+  border: 1px solid black;
+  display: grid;
+  background-color: white;
+}
+
+.hovered-grid-block {
+  background-color: black;
+}
