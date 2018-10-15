@@ -1,6 +1,7 @@
 const container = document.querySelector('.container');
 let gridBlocks;
 let gridSelection;
+let color = 0;
 
 const newBtn = document.querySelector('#new-board');
 newBtn.addEventListener('click', (e) => {
@@ -10,6 +11,20 @@ newBtn.addEventListener('click', (e) => {
 const resetBtn = document.querySelector('#reset-board');
 resetBtn.addEventListener('click', (e) => {
   resetBoard();
+});
+
+const colorBtn = document.querySelector('#color-btn');
+colorBtn.addEventListener('click', (e) => {
+  // Color starts turned off.
+  // If color is on, then turn it off & change the button to say 'Color'.
+  if(color) {
+    color = 0;
+    colorBtn.textContent = 'Color';
+  }
+  else { // If color is off, then turn it on & change the button to say 'Black'.
+    color = 1;
+    colorBtn.textContent = 'Black'
+  }
 });
 
 function getGridSize() {
@@ -51,15 +66,29 @@ function createBoard() {
 }
 
 function resetBoard() {
-  gridBlocks.forEach((gridBlock) => {
-    gridBlock.classList.remove('hovered-grid-block');
-  });
+  // Checks if a non-null is currently in the gridBlocks var.
+  // Using this to prevent an error being generated when the grid has not been loaded.
+  if(gridBlocks) {
+    gridBlocks.forEach((gridBlock) => {
+      gridBlock.style.cssText = "";
+    });
+  }
 }
 
 function addEventListenersToGridBlocks() {
   gridBlocks.forEach((gridBlock) => {
     gridBlock.addEventListener('mouseover', (e) => {
-      gridBlock.classList.add('hovered-grid-block');
+      if(color) {
+        // If the color btn is selected, pass a random color.
+        gridBlock.style.cssText = `background-color: 
+          rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)});`;
+      } else { // Else pass black to the grid when hovered.
+        gridBlock.style.cssText = 'background-color: black;';
+      }
     });
   });
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
 }

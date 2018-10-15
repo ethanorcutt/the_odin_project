@@ -9,13 +9,16 @@ body {
 
 .container {
   position: relative;
-  margin: 50 auto 0 auto;
+  margin: 0 auto;
   width: 800px;
   border: 1px solid black;
   display: grid;
   background-color: white;
 }
 
-.hovered-grid-block {
-  background-color: black;
+#buttons-container {
+  position: relative;
+  margin: 20 auto;
+  width: 100px;
+  display: grid;
 }
