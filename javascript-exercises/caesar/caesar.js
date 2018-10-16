@@ -1,18 +1,23 @@
 const caesar = function(string, shift) {
-  let charArray = string.split('');
-  let shiftedArray = [];
+  return string
+    .split("")
+    .map(char => shiftChar(char, shift))
+    .join("");
+};
 
-  console.log(charArray);
+const codeSet = code => (code < 97 ? 65 : 97);
 
-  for (var i = 0; i < charArray.length; i++) {
-    if(isLetter(charArray[i])) shiftedArray.push(String.fromCharCode((charArray[i].charCodeAt() + shift)));
+const mod = (n, m) => (n % m + m) % m;
+
+const shiftChar = (char, shift) => {
+  const code = char.charCodeAt();
+
+  if ((code >= 65 && code <= 90) || (code >= 97 && code <= 122)) {
+    return String.fromCharCode(
+      mod(code + shift - codeSet(code), 26) + codeSet(code)
+    );
   }
-  
-  return shiftedArray.join('');
-}
+  return char;
+};
 
-function isLetter(c) {
-  return c.toLowerCase() != c.toUpperCase();
-}
-
-module.exports = caesar
+module.exports = caesar;

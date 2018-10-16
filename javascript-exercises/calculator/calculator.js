@@ -11,7 +11,7 @@ function sum (array) {
 }
 
 function multiply (array) {
-	// Has to be 1 as the default b/c the first run it 0 * 2 => 0.
+	// Has to be 1 as the default b/c the first run it 0 * 2 = 0.
 	// By setting default to 1, we let the problem continue. 
 	return array.reduce((a, b) => a * b, 1);
 }
