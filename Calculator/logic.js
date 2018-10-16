@@ -52,7 +52,7 @@ function operate () {
     default: alert('Invalid Input');
   }
 
-  checkAndUpdateScores ();
+  checkAndUpdateScores (calculatorOutput);
 }
 
 function createGrid (maxHeightWidth) {
@@ -65,7 +65,7 @@ function createBoard () {
   let divCount = Math.pow(gridSize, 2);
 
   createGrid(maxHeightWidth);
-  checkAndUpdateScores();
+  checkAndUpdateScores(0);
 
   gridBlocks = document.querySelectorAll('#calculator-body .grid-block-divs');
   addEventListenersToGridBlocks();
@@ -77,8 +77,8 @@ function updateTextDisplays (target, string) {
     if(target === 'calculatorOutput') calculatorOutput.textContent = string;
 }
 
-function checkAndUpdateScores () {
-    updateTextDisplays('calculatorOutput', calculatorOutput);
+function checkAndUpdateScores (output) {
+    updateTextDisplays('calculatorOutput', output);
 }
 
 function addEventListenersToGridBlocks () {
@@ -86,14 +86,15 @@ function addEventListenersToGridBlocks () {
     gridBlock.addEventListener('click', (e) => {
       if (!ignoreableIDs.includes(gridBlock.id)) {
         inputtedValues.push(gridBlock.id);
+        checkAndUpdateScores(gridBlock.id);
       }
 
       if (gridBlock.id == 'clear-all') {
         calculatorOutput = 0;
         inputtedValues = [];
-        checkAndUpdateScores();
+        checkAndUpdateScores(calculatorOutput);
       }
-      else if (gridBlock.id == '='){
+      else if (gridBlock.id == '=') {
         operate ();
       }
     });
