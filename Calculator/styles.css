@@ -1,0 +1,52 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+#calculator-head
+{
+    width: 450px;
+    height: 150px;
+    margin: 50 auto 0 auto;
+
+    border: solid black;
+    border-width: .5px .5px 0 .5px;
+    background-color: lightgray;
+}
+
+#calculator-output
+{
+    font-size: 5em;
+    font-weight: bold;
+
+    padding-right: 20px;
+
+    text-align: right;
+}
+
+#calculator-body
+{
+    display: grid;
+
+    width: 450px;
+    margin: 0 auto;
+
+    background-color: pink;
+}
+
+.grid-block-divs
+{
+    font-weight: bold;
+
+    display: grid;
+
+    width: 112.5px;
+    height: 112.5px;
+
+    text-align: center;
+
+    border: .5px solid black;
+
+    align-items: center;
+}
