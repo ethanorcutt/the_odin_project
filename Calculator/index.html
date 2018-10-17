@@ -9,33 +9,38 @@
 <body>
     <div class="container">
       <div id="calculator-head">
-        <div id="calculator-output"></div>
+        <div class="row">
+          <div id="calculator-output">0</div>
+        </div>
+        <div class="row">
+          <div id="calculator-output-small"></div>
+        </div>
       </div>
-      <div id="calculator-body">
-        <div class='grid-block-divs active' id='clear-all'>Clear</div>
-        <div class='grid-block-divs'></div>
-        <div class='grid-block-divs active' id='backspace'>Bksp</div>
-        <div class='grid-block-divs active' id='/'>/</div>
+      <div class="calculator-body">
+        <div class='calc-button special-operator' id='CLR'>Clear</div>
+        <div class='calc-button special-operator' id=''></div>
+        <div class='calc-button special-operator' id='BKSP'>Bksp</div>
+        <div class='calc-button operator' id='/'>/</div>
 
-        <div class='grid-block-divs active' id='7'>7</div>
-        <div class='grid-block-divs active' id='8'>8</div>
-        <div class='grid-block-divs active' id='9'>9</div>
-        <div class='grid-block-divs active' id='*'>*</div>
+        <div class='calc-button' id='7'>7</div>
+        <div class='calc-button' id='8'>8</div>
+        <div class='calc-button' id='9'>9</div>
+        <div class='calc-button operator' id='*'>*</div>
 
-        <div class='grid-block-divs active' id='4'>4</div>
-        <div class='grid-block-divs active' id='5'>5</div>
-        <div class='grid-block-divs active' id='6'>6</div>
-        <div class='grid-block-divs active' id='-'>-</div>
+        <div class='calc-button' id='4'>4</div>
+        <div class='calc-button' id='5'>5</div>
+        <div class='calc-button' id='6'>6</div>
+        <div class='calc-button operator' id='-'>-</div>        
 
-        <div class='grid-block-divs active' id='1'>1</div>
-        <div class='grid-block-divs active' id='2'>2</div>
-        <div class='grid-block-divs active' id='3'>3</div>
-        <div class='grid-block-divs active' id='+'>+</div>
-
-        <div class='grid-block-divs'></div>
-        <div class='grid-block-divs active' id='0'>0</div>
-        <div class='grid-block-divs active' id='.'>.</div>
-        <div class='grid-block-divs active' id='='>=</div>
+        <div class='calc-button' id='1'>1</div>
+        <div class='calc-button' id='2'>2</div>
+        <div class='calc-button' id='3'>3</div>
+        <div class='calc-button operator' id='+'>+</div>
+        
+        <div class='calc-button' id='.'>.</div>
+        <div class='calc-button' id='0'>0</div>
+        <div class='calc-button' id=''></div>
+        <div class='calc-button operator' id='='>=</div>
       </div>
     </div>
     <script type="text/javascript" src="logic.js"></script>

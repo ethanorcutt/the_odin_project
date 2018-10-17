@@ -1,119 +1,76 @@
-const container = document.querySelector('.container');
-const calculatorHead = document.querySelector('#calculator-head');
-const calculatorBody = document.querySelector('#calculator-body');
-const gridWidth = 450;
-const gridSize = 4;
-
-let calculatorOutput = 0;
-let gridBlocks;
 let inputtedValues = [];
-let runningTotal = 0;
-
-function add (a, b) {
-  return a + b;
-}
-
-function subtract (a, b) {
-  return a - b;
-}
-
-function divide (a, b) {
-  return a / b;
-}
-
-function multiply (a, b) {
-  return a * b;
-}
 
 function operate () {
-  const operators = ['+', '-', '/', '*'];
-  let operatorIndices = [];
-  let firstValue = 0;
-  let secondValue = 0;
-  let operator = '';
-  
-  for (let x = 0; x <= inputtedValues.length; x++) {
-    if (operators.includes(inputtedValues[x])) operatorIndices.push(x);
-  }
-
-  console.log(inputtedValues);
-  console.log(operatorIndices);
-
-  if (operators.includes(inputtedValues[0])) {
-    firstValue = calculatorOutput;
-  } else {
-    firstValue = Number(inputtedValues.slice(0, operatorIndices[0]));
-  }
-  
-  secondValue = Number(inputtedValues.slice(operatorIndices[0]
-            + 1, inputtedValues.length));
-  operator = inputtedValues[operatorIndices[0]];
-
-  switch (operator) {
+  switch (currentOperator) {
     case '+': calculatorOutput = add (firstValue, secondValue); break;
     case '-': calculatorOutput = subtract (firstValue, secondValue); break;
     case '*': calculatorOutput = multiply (firstValue, secondValue); break;
     case '/': calculatorOutput = divide (firstValue, secondValue); break;
-    default: alert('Invalid Input');
+    default: alert('Invalid Input - OPERATE');
   }
 
-  clearCurrentTotal(0);
-  checkAndUpdateScores (calculatorOutput);
+  function add (a, b) {
+    return a + b;
+  }
+
+  function subtract (a, b) {
+    return a - b;
+  }
+
+  function divide (a, b) {
+    return a / b;
+  }
+
+  function multiply (a, b) {
+    return a * b;
+  }
 }
 
-function createGrid (maxHeightWidth) {
-  calculatorBody.style.gridTemplateColumns = `repeat(${gridSize}, ${maxHeightWidth})`;
-  calculatorBody.style.gridTemplateRows = `repeat(${gridSize}, ${maxHeightWidth})`;
-}
-
-function createBoard () {
-  let maxHeightWidth = (gridWidth / gridSize);
-  let divCount = Math.pow(gridSize, 2);
-
-  createGrid(maxHeightWidth);
-  checkAndUpdateScores(0);
-
-  gridBlocks = document.querySelectorAll('#calculator-body .grid-block-divs.active');
-  addEventListenersToGridBlocks();
+function checkAndUpdateScores (output) {
+  updateTextDisplays('calculatorOutput', output);
+  updateTextDisplays('calculatorOutputSmall', inputtedValues.join(' '));
 }
 
 function updateTextDisplays (target, string) {
     const calculatorOutput = document.querySelector('#calculator-output');
+    const calculatorOutputSmall = document.querySelector('#calculator-output-small');
     
     if(target === 'calculatorOutput') calculatorOutput.textContent = string;
+    else if(target === 'calculatorOutputSmall') calculatorOutputSmall.textContent = string;
 }
 
-function checkAndUpdateScores (output) {
-    updateTextDisplays('calculatorOutput', output);
-}
+function setupEventListeners() {
+  const calcButtons = document.querySelectorAll('.calc-button');
 
-function addEventListenersToGridBlocks () {
-  const ignoreableIDs = ['clear-all', 'clear-current', 'backspace', 'pos-neg-toggle', '='];
-
-  gridBlocks.forEach((gridBlock) => {
-    gridBlock.addEventListener('click', (e) => {
-      if (!ignoreableIDs.includes(gridBlock.id)) {
-        inputtedValues.push(gridBlock.id);
-        checkAndUpdateScores(gridBlock.id);
-      }
-      else if (gridBlock.id == 'clear-all') {
-        clearCurrentTotal(1);
-      }
-      else if (gridBlock.id == 'backspace') {
-        inputtedValues.pop();
-        checkAndUpdateScores(inputtedValues[inputtedValues.length - 1]);
-      }
-      else if (gridBlock.id == '=') {
-        operate ();
-      }
-    });
+  calcButtons.forEach(btn => {
+    if (btn.id !== '') {
+      btn.addEventListener('click', (e) => {
+        validateInput(btn.id);
+      });
+    }
   });
 }
 
-function clearCurrentTotal(clearEverything) {
-  if (clearEverything) calculatorOutput = 0;
-  inputtedValues = [];
-  checkAndUpdateScores(calculatorOutput);
+function validateInput(btnID) {
+  const operators = ['+', '-', '*', '/'];
+
+  if (btnID == 'CLR') resetCalculator();
+  else if (btnID == 'BKSP') {
+    inputtedValues.pop();
+    checkAndUpdateScores(inputtedValues[inputtedValues.length - 1]);
+  }
+  else if (btnID == '=') alert ('Operate not working currently.'); // operate();
+  else { 
+    inputtedValues.push(btnID);
+    checkAndUpdateScores(btnID);
+  }
+  
+  console.log(inputtedValues);
 }
 
-createBoard ();
+function resetCalculator() {
+  inputtedValues = [];
+  checkAndUpdateScores(0);
+}
+
+setupEventListeners();
