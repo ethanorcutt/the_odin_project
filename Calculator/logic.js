@@ -1,13 +1,13 @@
 const container = document.querySelector('.container');
 const calculatorHead = document.querySelector('#calculator-head');
 const calculatorBody = document.querySelector('#calculator-body');
-const ignoreableIDs = ['clear-all', 'clear-current', 'backspace', 'pos-neg-toggle', '='];
 const gridWidth = 450;
 const gridSize = 4;
 
 let calculatorOutput = 0;
 let gridBlocks;
 let inputtedValues = [];
+let runningTotal = 0;
 
 function add (a, b) {
   return a + b;
@@ -39,9 +39,14 @@ function operate () {
   console.log(inputtedValues);
   console.log(operatorIndices);
 
-  firstValue = Number(inputtedValues.slice(0, operatorIndices[0]).join(''));
+  if (operators.includes(inputtedValues[0])) {
+    firstValue = calculatorOutput;
+  } else {
+    firstValue = Number(inputtedValues.slice(0, operatorIndices[0]));
+  }
+  
   secondValue = Number(inputtedValues.slice(operatorIndices[0]
-              + 1, inputtedValues.length).join(''));
+            + 1, inputtedValues.length));
   operator = inputtedValues[operatorIndices[0]];
 
   switch (operator) {
@@ -52,6 +57,7 @@ function operate () {
     default: alert('Invalid Input');
   }
 
+  clearCurrentTotal(0);
   checkAndUpdateScores (calculatorOutput);
 }
 
@@ -67,7 +73,7 @@ function createBoard () {
   createGrid(maxHeightWidth);
   checkAndUpdateScores(0);
 
-  gridBlocks = document.querySelectorAll('#calculator-body .grid-block-divs');
+  gridBlocks = document.querySelectorAll('#calculator-body .grid-block-divs.active');
   addEventListenersToGridBlocks();
 }
 
@@ -82,23 +88,32 @@ function checkAndUpdateScores (output) {
 }
 
 function addEventListenersToGridBlocks () {
+  const ignoreableIDs = ['clear-all', 'clear-current', 'backspace', 'pos-neg-toggle', '='];
+
   gridBlocks.forEach((gridBlock) => {
     gridBlock.addEventListener('click', (e) => {
       if (!ignoreableIDs.includes(gridBlock.id)) {
         inputtedValues.push(gridBlock.id);
         checkAndUpdateScores(gridBlock.id);
       }
-
-      if (gridBlock.id == 'clear-all') {
-        calculatorOutput = 0;
-        inputtedValues = [];
-        checkAndUpdateScores(calculatorOutput);
+      else if (gridBlock.id == 'clear-all') {
+        clearCurrentTotal(1);
+      }
+      else if (gridBlock.id == 'backspace') {
+        inputtedValues.pop();
+        checkAndUpdateScores(inputtedValues[inputtedValues.length - 1]);
       }
       else if (gridBlock.id == '=') {
         operate ();
       }
     });
   });
+}
+
+function clearCurrentTotal(clearEverything) {
+  if (clearEverything) calculatorOutput = 0;
+  inputtedValues = [];
+  checkAndUpdateScores(calculatorOutput);
 }
 
 createBoard ();
