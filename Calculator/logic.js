@@ -1,3 +1,6 @@
+// https://www.w3schools.com/jsref/jsref_eval.asp
+// https://github.com/craigwadding/jscalc/blob/master/script.js
+
 const operators = ['+', '-', '*', '/'];
 
 let inputtedValues = [];
