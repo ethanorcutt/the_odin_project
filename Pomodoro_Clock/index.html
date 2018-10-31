@@ -1,0 +1,42 @@
+<html>
+    
+  <head>
+      <meta charset="UTF-8">
+      <title>Pomodoro Clock</title>
+      <link rel="stylesheet" href="styles.css">
+  </head>
+
+  <body>
+    <div class="container">
+      <h1 id="title">Pomodoro Clock</h1>
+
+      <div id="timer">
+        <div id="countdown-clock"></div>
+      </div>  
+
+      <div id="controls-box">
+        <div id="control-buttons">
+          <button id="play-button" class="control-button">Play</button>
+          <button id="pause-button" class="control-button">Pause</button>
+          <button id="reset-button" class="control-button">Reset</button>
+          <button id="stop-button" class="control-button">Stop</button>
+        </div>
+      </div>
+
+      <div id="time-and-break-lengths">
+        <div class="length-boxes">
+          <div id="session-plus-button" class="align-items">+</div>
+          <div id="session-length-display" class='align-items'></div>
+          <div id="session-minus-button" class="align-items">-</div>
+        </div>
+        <div class="length-boxes">
+          <div id="break-plus-button" class="align-items">+</div>
+          <div id="break-length-display" class='align-items'></div>
+          <div id="break-minus-button" class="align-items">-</div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="logic.js"></script>
+  </body>
+
+</html>
